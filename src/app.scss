@@ -1,0 +1,10 @@
+.app {
+  padding: 20px 40px;
+
+  > header {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+  }
+}
