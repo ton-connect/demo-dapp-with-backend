@@ -1,5 +1,5 @@
 {
-  "name": "demo-dapp",
+  "name": "demo-dapp-with-backend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
