@@ -79,7 +79,7 @@
     "eslint-plugin-react": "^7.31.10",
     "prettier": "^2.7.1"
   },
-  "homepage": "https://ton-connect.github.io/demo-dapp/",
+  "homepage": "https://ton-connect.github.io/demo-dapp-with-backend/",
   "scripts": {
     "start": "node scripts/start.js",
     "build": "BUILD_PATH='./docs' node scripts/build.js",
