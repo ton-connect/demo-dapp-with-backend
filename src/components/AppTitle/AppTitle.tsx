@@ -25,7 +25,7 @@ export function AppTitle() {
 	return (
 		<>
 			<div className="dapp-title" onClick={() => setClicks((x) => x + 1)}>
-				<span className="dapp-title__text">My Dapp</span>
+				<span className="dapp-title__text">My Dapp with backend</span>
 				{wallet && <span className="dapp-title__badge">{chainNames[wallet.account.chain]}</span>}
 			</div>
 			<Debugger ref={debuggerRef} />
