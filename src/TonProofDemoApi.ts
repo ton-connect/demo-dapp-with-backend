@@ -1,4 +1,4 @@
-import { TonProofItemReply } from '@tonconnect/protocol';
+import { TonProofItemReplySuccess } from '@tonconnect/protocol';
 import { Account } from '@tonconnect/sdk';
 import { connector } from './connector';
 
@@ -21,8 +21,15 @@ class TonProofDemoApiService {
 			const tonProof = wallet.connectItems?.tonProof;
 
 			if (tonProof) {
-				this.checkProof(tonProof, wallet.account);
-			} else if (!this.accessToken) {
+				if ('proof' in tonProof) {
+					this.checkProof(tonProof.proof, wallet.account);
+					return;
+				}
+
+				console.error(tonProof.error);
+			}
+
+			if (!this.accessToken) {
 				connector.disconnect();
 			}
 		});
@@ -38,7 +45,7 @@ class TonProofDemoApiService {
 		return response.payload as string;
 	}
 
-	async checkProof(proof: TonProofItemReply['proof'], account: Account) {
+	async checkProof(proof: TonProofItemReplySuccess['proof'], account: Account) {
 		try {
 			const reqBody = {
 				address: account.address,
