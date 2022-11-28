@@ -1,4 +1,5 @@
 import { DownOutlined } from '@ant-design/icons';
+import { WalletInfoRemote } from '@tonconnect/sdk';
 import { Button, Dropdown, Menu, Modal, notification, Space } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 import QRCode from 'react-qr-code';
@@ -8,6 +9,7 @@ import { useForceUpdate } from 'src/hooks/useForceUpdate';
 import { useSlicedAddress } from 'src/hooks/useSlicedAddress';
 import { useTonWallet } from 'src/hooks/useTonWallet';
 import { useTonWalletConnectionError } from 'src/hooks/useTonWalletConnectionError';
+import { authPayloadQuery } from 'src/state/auth-payload';
 import { walletsListQuery } from 'src/state/wallets-list';
 import { TonProofDemoApi } from 'src/TonProofDemoApi';
 import { isMobile } from 'src/utils';
@@ -39,6 +41,7 @@ export function AuthButton() {
 	useTonWalletConnectionError(onConnectErrorCallback);
 
 	const walletsList = useRecoilValueLoadable(walletsListQuery);
+	const authPayload = useRecoilValueLoadable(authPayloadQuery);
 
 	const address = useSlicedAddress(wallet?.account.address);
 
@@ -49,28 +52,27 @@ export function AuthButton() {
 	}, [modalUniversalLink, wallet]);
 
 	const handleButtonClick = useCallback(async () => {
-		const testTonProofPayload = await TonProofDemoApi.generatePayload();
-
 		// Use loading screen/UI instead (while wallets list is loading)
-		if (!(walletsList.state === 'hasValue')) {
+		if (!(walletsList.state === 'hasValue') || !(authPayload.state === 'hasValue')) {
 			setTimeout(handleButtonClick, 200);
+			return;
 		}
 
 		if (walletsList.contents.embeddedWallet) {
 			connector.connect(
 				{ jsBridgeKey: walletsList.contents.embeddedWallet.jsBridgeKey },
-				{ tonProof: testTonProofPayload },
+				{ tonProof: authPayload.contents.tonProofPayload },
 			);
 			return;
 		}
 
 		const tonkeeperConnectionSource = {
-			universalLink: walletsList.contents.walletsList[0].universalLink,
-			bridgeUrl: walletsList.contents.walletsList[0].bridgeUrl,
+			universalLink: (walletsList.contents.walletsList[0] as WalletInfoRemote).universalLink,
+			bridgeUrl: (walletsList.contents.walletsList[0] as WalletInfoRemote).bridgeUrl,
 		};
 
 		const universalLink = connector.connect(tonkeeperConnectionSource, {
-			tonProof: testTonProofPayload,
+			tonProof: authPayload.contents.tonProofPayload,
 		});
 
 		if (isMobile()) {
