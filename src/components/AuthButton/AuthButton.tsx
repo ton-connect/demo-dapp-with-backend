@@ -80,7 +80,7 @@ export function AuthButton() {
 		} else {
 			setModalUniversalLink(universalLink);
 		}
-	}, [walletsList]);
+	}, [walletsList, authPayload]);
 
 	return (
 		<>
