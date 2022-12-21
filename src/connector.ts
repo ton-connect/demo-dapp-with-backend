@@ -1,17 +1,14 @@
-import { SendTransactionRequest, TonConnect, UserRejectsError, WalletInfo } from '@tonconnect/sdk';
+import { SendTransactionRequest, TonConnect, UserRejectsError, WalletInfo, WalletInfoInjected } from '@tonconnect/sdk';
 import { notification } from 'antd';
-import { isMobile } from 'src/utils';
+import { isMobile, openLink } from 'src/utils';
 
-// Just to fix Githab pages url problem.
-// If your app main route is hte same as `window.location.origin` you don't have to pass this argument to the TonConnect constructor
-const dappMetadata = { dappMetedata: { url: 'https://ton-connect.github.io/demo-dapp-with-backend/' } };
+const dappMetadata = { manifestUrl: 'https://ton-connect.github.io/demo-dapp-with-backend/tonconnect-manifest.json' };
 
 export const connector = new TonConnect(dappMetadata);
-
 export async function sendTransaction(tx: SendTransactionRequest, wallet: WalletInfo): Promise<{ boc: string }> {
 	try {
-		if ('universalLink' in wallet && isMobile()) {
-			window.location.assign(wallet.universalLink);
+		if ('universalLink' in wallet && !(wallet as WalletInfoInjected).embedded && isMobile()) {
+			openLink(addReturnStrategy(wallet.universalLink, 'none'), '_blank');
 		}
 
 		const result = await connector.sendTransaction(tx);
@@ -39,4 +36,10 @@ export async function sendTransaction(tx: SendTransactionRequest, wallet: Wallet
 		console.log(e);
 		throw e;
 	}
+}
+
+export function addReturnStrategy(url: string, returnStrategy: 'back' | 'none'): string {
+	const link = new URL(url);
+	link.searchParams.append('ret', returnStrategy);
+	return link.toString();
 }

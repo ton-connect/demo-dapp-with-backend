@@ -2045,19 +2045,19 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-"@tonconnect/protocol@^0.0.18":
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/@tonconnect/protocol/-/protocol-0.0.18.tgz#c8d5613bb3e82d555ec80f3f7c106c8304574a78"
-  integrity sha512-t61/9t1F0Xdd1RHftJmEU7yFC5OD9+pZZa99IplDjmdL4vnoC5TPJhc44LAOhv4UOO9vnoNnoAuNkUnnWA/SeQ==
+"@tonconnect/protocol@^0.0.25":
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/@tonconnect/protocol/-/protocol-0.0.25.tgz#c7764ba2ac3f7931130f872d80d65cf8d3c20e93"
+  integrity sha512-WwvlRRVEQR5j7EXWRzUT4OB/y8cOewDFTKMTQExwwGAhVw9qQaCLtK3pzVf1jeMi6JrTP3Zh8UtQvs/wBr3/XQ==
   dependencies:
-    buffer "^6.0.3"
+    tweetnacl-util "^0.15.1"
 
-"@tonconnect/sdk@^0.0.31":
-  version "0.0.31"
-  resolved "https://registry.yarnpkg.com/@tonconnect/sdk/-/sdk-0.0.31.tgz#ad878f8a4ccc4b21eac467a38ba990a6eff80dfe"
-  integrity sha512-yWq1DBFHwNisghXG5JardfRjnIdoRTc2ak5rWW4XaS+jB+lQh/PM97fA7ZVAmwD/KnIjhaZYLwAC/nBs2j2kGw==
+"@tonconnect/sdk@^0.0.44":
+  version "0.0.44"
+  resolved "https://registry.yarnpkg.com/@tonconnect/sdk/-/sdk-0.0.44.tgz#f8a9de443319176134a2e42f93d4e328e4189d70"
+  integrity sha512-EXnQTm0WWTYKSIhtdDQvWtvXpzaa2iZfaNq3+2r1K1sScAsqinAk9UJDkoQeG7klxWkjSEaxYeWPRSp7qnnNHA==
   dependencies:
-    "@tonconnect/protocol" "^0.0.18"
+    "@tonconnect/protocol" "^0.0.25"
     deepmerge "^4.2.2"
     eventsource "^2.0.2"
     node-fetch "^2.6.7"
@@ -9774,6 +9774,11 @@ tsutils@^3.21.0:
   integrity sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==
   dependencies:
     tslib "^1.8.1"
+
+tweetnacl-util@^0.15.1:
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/tweetnacl-util/-/tweetnacl-util-0.15.1.tgz#b80fcdb5c97bcc508be18c44a4be50f022eea00b"
+  integrity sha512-RKJBIj8lySrShN4w6i/BonWp2Z/uxwC3h4y7xsRrpP59ZboCd0GpEVsOnMDYLMmKBpYhb5TgHzZXy7wTfYFBRw==
 
 tweetnacl@1.0.3, tweetnacl@^1.0.3:
   version "1.0.3"

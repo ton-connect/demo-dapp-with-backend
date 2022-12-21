@@ -4,7 +4,7 @@ import { Button, Dropdown, Menu, Modal, notification, Space } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 import QRCode from 'react-qr-code';
 import { useRecoilValueLoadable } from 'recoil';
-import { connector } from 'src/connector';
+import { addReturnStrategy, connector } from 'src/connector';
 import { useForceUpdate } from 'src/hooks/useForceUpdate';
 import { useSlicedAddress } from 'src/hooks/useSlicedAddress';
 import { useTonWallet } from 'src/hooks/useTonWallet';
@@ -12,7 +12,7 @@ import { useTonWalletConnectionError } from 'src/hooks/useTonWalletConnectionErr
 import { authPayloadQuery } from 'src/state/auth-payload';
 import { walletsListQuery } from 'src/state/wallets-list';
 import { TonProofDemoApi } from 'src/TonProofDemoApi';
-import { isMobile } from 'src/utils';
+import { isMobile, openLink } from 'src/utils';
 import './style.scss';
 
 const menu = (
@@ -76,7 +76,7 @@ export function AuthButton() {
 		});
 
 		if (isMobile()) {
-			window.location.assign(universalLink);
+			openLink(addReturnStrategy(universalLink, 'none'), '_blank');
 		} else {
 			setModalUniversalLink(universalLink);
 		}

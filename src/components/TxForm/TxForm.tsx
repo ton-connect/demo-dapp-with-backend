@@ -10,7 +10,7 @@ import './style.scss';
 const { Title } = Typography;
 
 const defaultTx = {
-	valid_until: Date.now() + 1000000,
+	validUntil: Date.now() + 1000000,
 	messages: [
 		{
 			address: '0:412410771DA82CBA306A55FA9E0D43C9D245E38133CB58F1457DFB8D5CD8892F',
