@@ -1,6 +1,7 @@
 import { TonProofItemReplySuccess } from '@tonconnect/protocol';
 import { Account } from '@tonconnect/sdk';
 import { connector } from './connector';
+import './patch-local-storage-for-github-pages';
 
 class TonProofDemoApiService {
 	localStorageKey = 'demo-api-access-token';
