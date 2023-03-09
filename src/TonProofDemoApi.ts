@@ -60,6 +60,9 @@ class TonProofDemoApiService {
 			const response = await (
 				await fetch(`${this.host}/ton-proof/checkProof`, {
 					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
 					body: JSON.stringify(reqBody),
 				})
 			).json();
